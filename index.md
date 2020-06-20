@@ -1,0 +1,329 @@
+# Learning Core Javascript
+
+## Functional Programming
+
+- No side effects
+- Easier for testing
+
+## Core Data Structures (Objects and Arrays)
+
+### Objects
+
+```javascript
+
+    var person = {};
+    person.name = "Mrs. White";
+
+    var person = {
+        name : "Mrs. White"
+    };
+
+```
+
+**Note:** anything that uses dot notation in javascript is an object.
+
+Primitive values are stored with a reference by value.
+
+### Arrays
+
+```javascript
+
+    var person = [];
+    person.name = "Mrs. White";
+
+    var who = person.name;
+    who; // ??
+
+```
+
+**Notes:** Arrays are considered to be objects in javascript, and it can
+therefore have properties.
+
+Array elements are stored as strings in object notation.
+
+**Example**:
+
+```javascript
+
+person.name = "Mr. White";
+person[0] = 'something';
+
+Object Notation:
+    "name" => "Mr. White",
+    "0" => "something"
+
+```
+
+Elements of an array that cannot be represent as strings (person.0) use brackets that denote
+the string version in an object. Dot notations coerces a property in a string.
+
+**Note:** Array.isArray() used to determine whether an object is an array.
+
+The length of an array only changes when a numerical indices is added to the
+array.
+
+### Rules
+
+Dots:
+- [x] strings
+- [ ] numbers
+- [ ] quotations
+- [ ] weird characters
+- [ ] expressions
+
+Brackets:
+- [x] strings
+- [x] numbers
+- [x] quotations
+- [x] weird characters
+- [x] expressions
+
+### ES6 Destructuring (Objects and Arrays)
+
+Simplified way of defining variables by taking them from the content of an
+array or object. Destructuring has a target and source
+
+```javascript
+
+// Example
+
+// Variable Declaration
+// Target          :           Source
+const [first, second] = [true, false];
+let [first, second] = [true, false]
+var [first, second] = [true, false]
+
+// Assignment:
+[first, second] = [true, false];
+
+```
+
+**Note:** Objects don't have an order but the source and target object names
+have to match. Arrays destruct into a target based on position.
+
+**Examples**
+
+```javascript
+
+// Value Omission
+const [a, ,b] = [1, 2, 3] // a = 1, b = 3
+
+// Spread operator
+const [a, ...b] = [1, 2, 3] // a = 1, b = [2, 3]
+
+// Swapping Variables
+let a = 1, b = 2
+[b, a] = [a, b] // a = 2, b = 1
+
+```
+
+## List Transforms(Nested Data Structures)
+
+```javascript
+// Nested Data Structure
+const game = {
+    'suspects': [
+        {
+            name: "Rusty",
+            color: "orange",
+        },
+        {
+            name: "Miss Scarlet",
+            color: "red"
+        }
+    ]
+};
+
+// Looping and logging each element of game.suspect
+function foo(){
+    for(let i = 0; i < game.suspects.length; i++){
+        console.log(game.suspects[i])
+    }
+}
+
+// Example 2 used with objects
+function foo(){
+    for(let key in obj){
+        console.log(key);
+    }
+}
+
+// Destructuring color strings
+let suspects = [
+    {
+        name: "Rusty",
+        color: "orange",
+    },
+    {
+        name: "Miss Scarlet",
+        color: "red"
+    }
+]
+
+const [firstColor, secondColor] = [suspects[0].color, suspects[1].color]; // Method 1
+const [firstColor, secondColor] = suspects.map(s => return suspect.color); // Method 2
+const [{color: firstColor}, {color: secondColor}] = suspects // Method 3
+
+```
+
+### Higher Order Functions(HOP)
+
+#### forEach
+
+```javascript
+
+let suspects = ['Miss Scarlet', 'Colonel Mustard', 'Mr. White']
+
+// Creates suspect objects
+function CreateSuspectObject(name){
+    return{
+        name: name,
+        color: name.split(' ')[1],
+        speak() {
+            console.log('My name is ', name)
+        }
+    };
+}
+
+// Instantiating each suspect
+
+// Example 1
+let suspectsList = [];
+
+for(let i = 0, i < suspects.length; i++){
+    suspectsList.push(CreateSuspectObject(suspects[i]));
+}
+
+```
+
+**Looping with _.each**
+
+- Does not return anything
+
+- Iterates over a list of elements, passing values to a function
+
+- Each invocation of iterator, the function is called with three arguments:
+    - (element, index, list) **Arrays**
+    - (value, key, list) **Objects**
+
+```javascript
+
+// Takes list as an argument
+_.each(suspects, function(name){
+    suspectsList.push(CreateSuspectObject(name));
+});
+
+// Uses dot notation
+suspects.forEach(function(name){
+    suspectsList.push(CreateSuspectObject(name));
+});
+
+```
+
+**Note:** `_` is an object in javascript standard library.
+
+```javascript
+
+/*
+    Complete the rest of this function so that it works as described in the
+    previous example(should work for Objects and Arrays):
+
+    _.each = function(list, callback){
+        ...TODO
+    };
+*/
+
+// Example 2
+let suspectsList = [];
+_each. = function(list, callback){
+    if (Array.isArray(list)){
+        for(let i = 0; i < list.length; i++){
+            callback(list[i], i, list);
+        }
+    }else{
+        for(let key in list){
+            callback(list[key], key, list);
+        }
+    }
+};
+
+```
+
+#### map
+
+- Produces a new array of values by mapping each value in list through a
+transformation function(iterator).
+
+- Always returns something.
+
+```javascript
+
+// _.map() usage
+const weapons = ['candlestick', 'lead pipe', 'revolver'];
+
+const makeBroken = function(item){
+    return `broken ${item}`;
+};
+
+const broken_weapons = _.map(weapons, makeBroken);
+
+// Creating Suspects list from Example 1
+const suspectsList = _.map(suspects, function(name){
+    return CreateSuspectObject(name);
+});
+
+```
+
+**Implementing _.map**
+
+```javascript
+
+// Using for loop
+const _.map = function(list, callback){
+    let storage = [];
+    for(let i = 0; i < list.length; i++){
+        storage.push(callback(list[i], i, list));
+    }
+
+    return storage;
+}
+
+// Using _.each
+const _.map = function(list, callback){
+    let storage = [];
+    _.each(list, function(v, i, list){
+        storage.push(callback(v, i, list));
+    });
+};
+
+```
+
+#### filter
+
+```javascript
+
+/*
+
+    We are going to want to filter by those who wer epresent, we need to write
+    our filter function:
+
+    _.filter(arr, callback){
+
+    }
+
+*/
+
+const _.filter = function(arr, callback){
+    let storage = [];
+    _.each(arr, function(v, i, arr){
+        if(callback(v, i, arr) === true){
+            storage.push(v);
+        }
+    });
+
+    return storage;
+};
+
+```
+
+## Function Anatomy

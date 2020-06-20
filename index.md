@@ -327,3 +327,103 @@ const _.filter = function(arr, callback){
 ```
 
 ## Function Anatomy
+
+- Names
+- Funciton declaration
+- Function body
+- Invocation / Call-time
+- Arguments/Parameters
+- Return / Side-effects
+
+### ES6: Arrow Functions
+
+Arrow functions does not have it's own referenec to `this`
+
+### Projeting exercise
+
+Converting a list of suspect objects into a list or suspect name strings
+(presen: `true`)
+
+```javascript
+
+// Example susepect object
+{
+    name: 'Mrs Scarlett',
+    present: true,
+    rooms [{}, {}, {}, ....]
+}
+
+// Projecting Exercise
+const present_suspects = _.filter(suspects, s => return s.present)
+const suspect_name = _.map(present_suspects, s => return s.name)
+
+```
+
+### Arguments Keyword / Spread Operator
+
+**Spread Operator**<br>
+Gathers extra arguments passed to a function and places in the last argument.
+
+```javascript
+
+// Example
+const createTumple = (a, b, c, ...d) => {
+    return [[a, c], [b, d]];
+}
+
+// without spread operator
+createTumple('It', 'be', 'could', 'anyone', 'no one');
+// => [['It', 'could'], ['be', 'anyone']]
+
+// With spread operator
+createTumple('It', 'be', 'could', 'anyone', 'no one');
+// => [['It', 'could'], ['be', ['anyone', 'no one']]]
+
+```
+
+**Argument keyword**<br>
+Allows for access to list of arguments passed to a function in the event that
+the number of arguments is not known.
+
+```javascript
+
+createTumple('It', 'be', 'could', 'anyone', 'no one');
+
+// Example
+const createTumple = (a, b, c, ...d) => {
+    console.log(arguments);
+    // ['It', 'be', 'could', 'anyone', 'no one']
+    return [[a, c], [b, d]];
+}
+
+```
+
+**Note:**
+- Arguments keyword does not create an actually array so it needs to be converted into a proper array.
+- Does not tell what paramter maps to what argument.
+
+### Array-like object
+
+Converting iterables to array
+
+```javascript
+
+// Using Arguments keyword
+Array.prototype.slice.call(arguments) // Example 1
+Array.from(arguments) // Example 2 (gives access to array functions)
+
+```
+
+#### _.form()
+
+```javascript
+
+const _.form = arr => {
+    return Array.prototype.slice.call(arr);
+}; // {0: true, length: 1, push: X}
+
+```
+
+**Note:** Functions are also objects.
+
+## Scopes

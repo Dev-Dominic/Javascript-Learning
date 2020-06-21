@@ -34,6 +34,10 @@ Primitive values are stored with a reference by value.
     var who = person.name;
     who; // ??
 
+    // Arrays are objects
+    arr = [0, 1, 2, 3, 4]
+    typedef arr; // object
+
 ```
 
 **Notes:** Arrays are considered to be objects in javascript, and it can
@@ -339,10 +343,10 @@ const _.filter = function(arr, callback){
 
 Arrow functions does not have it's own referenec to `this`
 
-### Projeting exercise
+### Projecting exercise
 
 Converting a list of suspect objects into a list or suspect name strings
-(presen: `true`)
+(present: `true`)
 
 ```javascript
 
@@ -350,12 +354,12 @@ Converting a list of suspect objects into a list or suspect name strings
 {
     name: 'Mrs Scarlett',
     present: true,
-    rooms [{}, {}, {}, ....]
+    rooms: [{}, {}, {}, ....]
 }
 
 // Projecting Exercise
-const present_suspects = _.filter(suspects, s => return s.present)
-const suspect_name = _.map(present_suspects, s => return s.name)
+const present_suspects = _.filter(suspects, s => return s.present) // filters suspects
+const suspect_name = _.map(present_suspects, s => return s.name) // filtered suspects' names
 
 ```
 
@@ -399,7 +403,7 @@ const createTumple = (a, b, c, ...d) => {
 ```
 
 **Note:**
-- Arguments keyword does not create an actually array so it needs to be converted into a proper array.
+- The Arguments keyword does not create an actually array so it needs to be converted into a proper array.
 - Does not tell what parameter maps to what argument.
 
 ### Array-like object
@@ -411,6 +415,7 @@ Converting iterables to array
 // Using Arguments keyword
 Array.prototype.slice.call(arguments) // Example 1
 Array.from(arguments) // Example 2 (gives access to array functions)
+_.from(arguments) // Example 3 (returns array)
 
 ```
 
@@ -428,8 +433,10 @@ const _.form = arr => {
 
 ## Scopes
 
-Scopes define where a variable is accessed. Within a function it is only
-possible to see variables up the scope. Every time a function is called it creates
-a new function scope.
+- Scopes define where a variable is accessible.
+- Within a function it is only possible to see variables up the scope.
+- Every time a function is called it creates a new function scope.
+- **var** denotes scoping by the `function` keyword
+- **let** denotes scoping by blocks, i.e `{}`
 
 ## HOP Functions and Callbacks

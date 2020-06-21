@@ -387,7 +387,7 @@ the number of arguments is not known.
 
 ```javascript
 
-createTumple('It', 'be', 'could', 'anyone', 'no one');
+createTuple('It', 'be', 'could', 'anyone', 'no one');
 
 // Example
 const createTumple = (a, b, c, ...d) => {
@@ -400,7 +400,7 @@ const createTumple = (a, b, c, ...d) => {
 
 **Note:**
 - Arguments keyword does not create an actually array so it needs to be converted into a proper array.
-- Does not tell what paramter maps to what argument.
+- Does not tell what parameter maps to what argument.
 
 ### Array-like object
 
@@ -427,3 +427,9 @@ const _.form = arr => {
 **Note:** Functions are also objects.
 
 ## Scopes
+
+Scopes define where a variable is accessed. Within a function it is only
+possible to see variables up the scope. Every time a function is called it creates
+a new function scope.
+
+## HOP Functions and Callbacks

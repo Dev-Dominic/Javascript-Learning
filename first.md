@@ -333,7 +333,7 @@ const _.filter = function(arr, callback){
 ## Function Anatomy
 
 - Names
-- Funciton declaration
+- Function declaration
 - Function body
 - Invocation / Call-time
 - Arguments/Parameters
@@ -341,7 +341,7 @@ const _.filter = function(arr, callback){
 
 ### ES6: Arrow Functions
 
-Arrow functions does not have it's own referenec to `this`
+Arrow functions does not have it's own referenece to `this`
 
 ### Projecting exercise
 
@@ -350,7 +350,7 @@ Converting a list of suspect objects into a list or suspect name strings
 
 ```javascript
 
-// Example susepect object
+// Example suspect object
 {
     name: 'Mrs Scarlett',
     present: true,
@@ -371,12 +371,12 @@ Gathers extra arguments passed to a function and places in the last argument.
 ```javascript
 
 // Example
-const createTumple = (a, b, c, ...d) => {
+const createTuple = (a, b, c, ...d) => {
     return [[a, c], [b, d]];
 }
 
 // without spread operator
-createTumple('It', 'be', 'could', 'anyone', 'no one');
+createTuple('It', 'be', 'could', 'anyone', 'no one');
 // => [['It', 'could'], ['be', 'anyone']]
 
 // With spread operator
@@ -394,7 +394,7 @@ the number of arguments is not known.
 createTuple('It', 'be', 'could', 'anyone', 'no one');
 
 // Example
-const createTumple = (a, b, c, ...d) => {
+const createTuple = (a, b, c, ...d) => {
     console.log(arguments);
     // ['It', 'be', 'could', 'anyone', 'no one']
     return [[a, c], [b, d]];
@@ -419,11 +419,11 @@ _.from(arguments) // Example 3 (returns array)
 
 ```
 
-#### _.form()
+#### from
 
 ```javascript
 
-const _.form = arr => {
+const _.from = arr => {
     return Array.prototype.slice.call(arr);
 }; // {0: true, length: 1, push: X}
 
@@ -440,3 +440,81 @@ const _.form = arr => {
 - **let** denotes scoping by blocks, i.e `{}`
 
 ## HOP Functions and Callbacks
+
+- Functions can act like data as they can be passed around into other functions
+or be stored using variable instantiation.
+
+- Callbacks are functions that are passed to other functions.
+
+**Passing Arguments to functions in ES6**
+
+```javascript
+
+// Example 1
+const ifElse = (condition, isTrue, isFalse, p1, p2) => {
+    return condition ? isTrue(p1, p2) : isFalse(p1, p2);
+};
+
+isElse(true, fn, fn_2, 'hello', 'world'); // Restricted to two parameters
+
+// Example 2 (Spread operator)
+const ifElse = (condition, isTrue, isFalse, ...args) => {
+    return condition ? isTrue(...args) : isFalse(...args);
+};
+
+isElse(true, isTrue, isFalse, 'hello', 'world', 'I am', 'bob');
+
+```
+
+### reduce
+
+```javascript
+
+const _.reduce = (list, callback, initial){
+    let memo = initial;
+    for(let i = 0; i < list.length; i++){
+
+        // Initializes memo/accumulated value to the first value of the list
+        // In the event that no initial value was passed.
+        if(i === 0 && memo === undefined){
+            memo = list[0]
+        }else{
+            memo = callback(list[i], memo);
+        }
+    }
+    return memo;
+};
+
+```
+
+**Additional Functional Utilities**
+
+- Composing
+- Currying
+
+## Advanced Scope (closures)
+
+Closures involves a returned function keeping track of its parent scope's associated
+data/variables.
+
+**Closure Example**
+
+```javascript
+
+const newClue = (name) => {
+    const length = name.length;
+
+    return (weapon) => {
+        let clue = length + weapon.length;
+        return !!(clue % 1);
+    };
+};
+
+```
+
+**Recipes for a Closure**
+
+1. Create parent function.
+2. Define variables in parent local scope.
+3. Define function inside the parent function. (Child function)
+4. Return child function and it retains parent local variables.

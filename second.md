@@ -172,3 +172,152 @@ futureData.then(e => return 'do something', e => return 'an error occurred')
 ```
 
 ## Classes and Prototypes (OOP)
+
+```javascript
+
+// Creates an empty object
+const user3 = Object.create(null);
+
+```
+
+### Generate objects using a function (Solution 1)
+
+```javascript
+
+// Creating a user
+function userCreator(name, score){
+    const newUser = {};
+    newUser.name = name;
+    newUser.score = score;
+    newUser.increment = function() {
+        newUser.score++;
+    };
+    return newUser;
+}
+
+// Test userCreator
+const user1 = userCreator("Will", 3);
+const user2 = userCreator("Sam", 4);
+user.increment(); // user.score = 4
+
+```
+
+**Problem**<br>
+
+Each object will have a copy of an associated method associated with the object,
+which is massive amount of data waste.
+
+### Generate objects using prototype chain (Solution 2)
+
+Store a reference to related object methods in one place for an object of a
+given type to reference when needed. This link is made using `Object.create()`
+
+```javascript
+
+// Creating a user
+function userCreator(name, score){
+    const newUser = Object.create(userFunctionStore);
+    newUser.name = name;
+    newUser.score = score;
+    return newUser;
+}
+
+const userFunctionStore = {
+    increment: function(){this.user++;},
+    login: function(){console.log('Logged in');}
+};
+
+```
+
+**Object.create()**
+
+This creates both a new empty object and a reference to another object which is
+stored in a property called `__proto__`. Javascript checks the `__proto__`
+property when it does not find a property or method on the actual object.
+
+**Note:** All objects in Javascript has a hidden `__proto__` property that links
+to the `Object.prototype` global object.
+
+**Note:** The `this` keyword is created on each new execution context, therefore
+child methods do not refer to the parent `this` value. A child can refer to it's
+parent `this` value by using the `call` method.
+
+```javascript
+
+// Example
+
+cosnt increment = function(){
+    function add1(){this.score++;}
+    add1.call(this)
+};
+
+```
+
+**Note:** An arrow functions can be used to get passed the mess of getting
+parent methods `this` keyword. The `this` keyword refers to the parent scope
+this in a child method.
+
+This solution of using protoype chain is the under hood way of how the standard
+ways of handling object is done. Thus knowing this solution helps with debugging
+of code, and improves understanding.
+
+### Generating objects using new keyword (Solution 3)
+
+The `new` keywrod is used to denote a function should create an object. Since
+functions are also objects, it uses this funcitonality to store methods
+associated with a given object using a property called `protoype` that stores
+the object methods. `Prototype` is created on the funciton reference and is
+empty initially.
+
+```javascript
+
+// Returns an object when called
+function userCreator(name, score){
+    this.name = name;
+    this.score = score;
+}
+
+// Adding new associated object methods to the function that creates Users
+userCreator.protoype.increment = function(){ this.score++; };
+userCreator.protoype.increment = function(){ console.log('Login'); };
+
+const user1 = new userCreator('Eva', 9);
+user1.increment();
+
+```
+
+**Note:** Each instance of an object's `__proto__` makes reference to the
+funciton definition's  `protoype` object property for all the methods that each
+instance can use.
+
+### Generating objects utilizing class and new keywords (Solution 4)
+
+Allows for associate methods and object properties all in one place using the
+`class` keyword. Nothing is changed under the hood but it is just for conveince
+and readabiity.
+
+```javascript
+
+// Utilizing class and new keyword
+class UserCreator{
+
+    constructor(name, score){
+        this.name = name;
+        this.score = score;
+    }
+
+    increment(){
+        this.score++;
+    }
+
+    login(){
+        console.log("Login");
+    }
+
+}
+
+// Creating new object
+const user1 = new UserCreator('Eva', 9);
+user1.increment();
+
+```

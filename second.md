@@ -7,6 +7,7 @@
 3. Closures
 4. Asynchronous Javascript
 5. Promises
+6. Classes and Prototypes (OOP)
 
 ## Javascript Principles
 
@@ -123,15 +124,51 @@ of the browser interaction with Javascript.
 
 ## Promises
 
-Promiess utilize two mechanisms to achieve asynchronous Javascript. In the case
+Promises utilize two mechanisms to achieve asynchronous Javascript. In the case
 of using fetch two things occur:
-1. Returns a response object that is stored in Javascript memeory
+1. Returns a response object that is stored in Javascript memory
 2. Creates new process in the browser that keeps track of the process, as
    features like `Network Request` is a browser feature. Once such a call is
    made and resolved the browser feature then updates the response object stored
    in memory. It will update it's value property specifically.
 
-Resposne objects also have an array known as the `unfulfiled` that stores a
-function that is ran once the web browser resovles the browser feature. This is
+Response objects also have an array known as the `unfulfilled` that stores a
+function that is ran once the web browser resolves the browser feature. This is
 added to the Promise object using the `.then` method.
 
+Javascript also utilizes a `Micro Task Queue` to keep track of Promises
+asynchronously. The `Micro Task Queue` is where completed Promises are queue to
+once resolved. This queue takes precedence over the `Call Stack Queue` but is
+still lower priority to the Javascript global `Callstack`. Once sycrhonous
+javascript code has been completed the order is:
+1. Callstack Javascript Global
+2. Micro Take Queue
+3. Callstack Queue
+
+**Note:** `Callstack Queue` gets functions that were directly passed to a Web
+Browser API feature (E.g setTimeout), while the `Micro Task Queue` gets all the associated Web
+Browser API features that have side effects that produce both a Promise Object
+stored in Javascript Memory and Reference in Web Browser API feature memory (E.g
+fetch).
+
+Javascript also offers a means of error handling in the event that a Promise
+that is resolved returns an error in the value property. This is achieved
+through the use of the array property `onRejection`. This stores all the error
+handling functions.
+
+```javascript
+
+// How to handle errors using catch
+let futureData = fetch('https://twitter.com/will/post/1')
+futureData.then(e => return 'do something').catch(e => return 'an error occurred')
+
+/*
+    How to handle errors with only '.then'
+    Promise.then(resolved, rejected)
+*/
+let futureData = fetch('https://twitter.com/will/post/1')
+futureData.then(e => return 'do something', e => return 'an error occurred')
+
+```
+
+## Classes and Prototypes (OOP)

@@ -28,3 +28,30 @@ what the computer does, that's where bugs enter the code.
     - OO vs OLOO
 
 ## Types
+
+**Primitive Types**
+- undefined **default value**
+- string
+- number
+- boolean (**True or False**)
+- symbol
+- bigint?
+- undeclared ?
+- null ?
+
+**Objects**
+- object
+- function?
+- array ? **Special Kind of Object type with certain behavior**
+
+```javascript
+
+var v;
+typeof v; // "undefined""
+v = '1';
+typeof v; // "string""
+
+```
+
+**Note:** typeof operator returns a string defining the type of a given variable
+or expression.

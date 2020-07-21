@@ -1,17 +1,22 @@
 {
-    "name": "src",
-    "version": "1.0.0",
-    "main": "App.js",
-    "scripts": {
-        "format": "prettier \"src/**/*.{js, html'}\" --write",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-        "prettier": "^2.0.5"
-    },
-    "dependencies": {},
-    "description": ""
+  "name": "src",
+  "version": "1.0.0",
+  "main": "App.js",
+  "scripts": {
+    "dev": "parcel src/index.html",
+    "format": "prettier \"src/**/*.{js, html'}\" --write",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "prettier": "^2.0.5"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "description": ""
 }

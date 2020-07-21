@@ -81,3 +81,7 @@ $RECYCLE.BIN/
 .Trashes
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
+
+# Peronsal ignores
+REACT/adopt-me/node_modules
+REACT/adopt-me/.cache

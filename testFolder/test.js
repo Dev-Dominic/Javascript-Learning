@@ -3,7 +3,7 @@
 //}
 
 let arr = [1, 2, 4];
-let hello = _.filter(arr, e => e > 1);
+let hello = _.filter(arr, (e) => e > 1);
 
 console.log(arr);
 console.log(hello);

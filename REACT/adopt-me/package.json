@@ -11,12 +11,17 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^3.7.0",
+    "@typescript-eslint/parser": "^3.7.0",
+    "eslint": "^7.5.0",
+    "eslint-plugin-react": "^7.20.3",
     "parcel-bundler": "^1.12.4",
     "prettier": "^2.0.5"
   },
   "dependencies": {
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "typescript-eslint": "0.0.1-alpha.0"
   },
   "description": ""
 }

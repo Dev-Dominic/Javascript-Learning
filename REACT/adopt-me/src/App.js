@@ -21,9 +21,9 @@ const App = () => {
 };
 
 /*
-    Rendering App Component to the browser DOM
-    Params:
-        - Element to be rendered
-        - Where it should be rendered in the DOM
+Rendering App Component to the browser DOM
+Params:
+- Element to be rendered
+- Where it should be rendered in the DOM
 */
 render(React.createElement(App), document.querySelector("#root"));

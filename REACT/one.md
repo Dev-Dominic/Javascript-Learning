@@ -108,7 +108,9 @@ Used to standardize javascript code.
 **Parcel**
 
 Used for packaging project files for both development and production. Another
-popular alternative is `webpack`.
+popular alternative is `webpack`. Parcel automatically scans javascript files
+within project and determines whether the modules required to run the project
+have been installed, if not it will fetch these modules from the npm repository.
 
 **Installing REACT and REACT-DOM via `npm`**
 
@@ -152,3 +154,58 @@ return (
     </div>
 );
 ```
+
+**Note:** Self closing tags are required in JSX
+
+## Hooks
+
+**Note:** `class` and `for` are reserved words in Javascript and cannot be used
+to define classes or be used to determine what a given label is for. Instead
+class is called `className` and label for is called `htmlFor`.
+
+```javascript
+
+<div className='search-params'>
+...
+...
+
+    <label htmlFor='location'>
+    ...
+    </label>
+<div>
+
+```
+
+The state of a value in `React` is not easy to change once you interact with a
+component in `React` it is re-render and will keep the initial value.
+
+**Note:** `use` is used to denote `Hooks` in React normally.
+
+[**Rules of React Hooks**](https://reactjs.org/docs/hooks-rules.html)
+
+### State with Hooks
+
+`useState` returns an array in which you are able to change the state of a
+given variable. The first returned variable stores the current state of a given
+variable while the secondary return variable will control updating the state of
+the variable.
+
+```javascript
+// Deconstructing array returned from useState
+// Where location holds current state while setLocation is used to change the
+// state of location
+const [location, setLocation] = useState("Seattle, WA");
+```
+
+**The difference between onChange and onBlur**
+
+`onChange` allows for a realtime even to occur, while in the case of `onBlur`
+only triggers an event once a given element/component is not in focus.
+
+**Unique list item keys**
+
+It can be inefficient for React to be re-rendering entire components in the case
+of a lis of items. Thus `key` attribute on elements can be used in changing the
+structure of a list of items by offering a unique identifer.
+
+### Custom Hooks

@@ -1,0 +1,3 @@
+[submodule "GraphQL/intro-to-graphql"]
+	path = GraphQL/intro-to-graphql
+	url = https://github.com/FrontendMasters/intro-to-graphql.git

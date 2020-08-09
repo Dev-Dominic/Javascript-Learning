@@ -208,4 +208,13 @@ It can be inefficient for React to be re-rendering entire components in the case
 of a lis of items. Thus `key` attribute on elements can be used in changing the
 structure of a list of items by offering a unique identifer.
 
-### Custom Hooks
+### useEffect (hooks continued)
+
+This is another Hook that is used as a means of updating component state.
+useEffect is not ran until after component is rendered.
+
+**Note:** Requires that dependencies are set so it knows when to run.
+
+```javascript
+useEffects(callback, arrayOfDependencies);
+```

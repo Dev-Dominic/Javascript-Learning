@@ -44,7 +44,9 @@ var module1 = function (exports, require, module, __filename, __dirname) {
 
 ### Creating Modules
 
-All your NodeJs code are modules.
+All your NodeJs code are modules. exporting using `nodejs` exports an object.
+
+`module.exports = {}`
 
 ```javascript
 const add = (num, num2) => {};
@@ -54,3 +56,100 @@ module.exports = { add, thing() {}, value: 1 };
 ```
 
 **Do not use `exports` to export modules only use `module.exports`**
+
+### Using Modules
+
+NodeJs injects another global called require allows for you to import a module.
+
+```javascript
+// lib.js exporting
+module.exports = () => {
+  console.log("name");
+};
+
+// app.js (user created) file importing
+const nameFn = require("./lib");
+```
+
+## Internal Modules & npm
+
+### Some shipped modules
+
+- fs - fileSystem module
+- http - low level module for creating netowkr based programs, `APIs`
+- path - useful for manipulating path strings
+
+#### fs Module (filesystem)
+
+Internal modules don't use './' for node_modules.
+
+`Importing fs module`
+
+```javascript
+const fs = require("fs");
+
+// Reading a file `readFileSync`
+const file = readFileSync("./lib.js", { encoding: "utf-8" });
+console.log(file);
+```
+
+### Remote Modules
+
+Also from importation of modules from other people.
+
+### NPM
+
+CLI to manage nodejs modules. Remote repository with modules, allows for
+publishing, download, and update modules.
+
+`NPM` utilizes `package.json` to package dependencies for a project.
+
+### yarn
+
+Does the samething as `npm`. `Yarn` utilizes
+
+    - file locking
+    - cacheing
+
+### Additional Notes
+
+Using path module to get full path
+
+```javascript
+const contactsPath = path.join(__dirname, "contacts");
+```
+
+**Capturing arguments when running node file**<br>
+
+This can be achieve through using the `process` global, and then added attribute
+of `agrv`.
+
+```bash
+$ node some_file.js new thing
+```
+
+```javascript
+console.log(process.argv); // ['<node-path>', '<some_file.js-filepath>', 'new', 'thing']
+```
+
+## Asynchronous Code Nodejs
+
+Nodejs is single threaded, event-based and aysnc like the browser.
+
+### Asynchronous Pattern
+
+```javascript
+// callback takes error as first arg, and result as second
+doAsyncThing((error, result) => {});
+
+// promises
+doAsyncThing()
+    .then(result => {})
+    .catch(error => {})
+
+// async / await
+const run = aysnc () => {
+    const results = await doAsyncThing() // returns promise
+    console.log('hello');
+}
+```

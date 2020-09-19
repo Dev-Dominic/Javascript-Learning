@@ -134,7 +134,7 @@ console.log(process.argv); // ['<node-path>', '<some_file.js-filepath>', 'new', 
 
 ## Asynchronous Code Nodejs
 
-Nodejs is single threaded, event-based and aysnc like the browser.
+Nodejs is single threaded, event-based and async like the browser.
 
 ### Asynchronous Pattern
 
@@ -144,12 +144,55 @@ doAsyncThing((error, result) => {});
 
 // promises
 doAsyncThing()
-    .then(result => {})
-    .catch(error => {})
+  .then((result) => {})
+  .catch((error) => {});
 
 // async / await
-const run = aysnc () => {
-    const results = await doAsyncThing() // returns promise
-    console.log('hello');
-}
+const run = async () => {
+  const results = await doAsyncThing(); // returns promise
+  console.log("hello");
+};
 ```
+
+## Debugging
+
+**Level 1**<br>
+
+Using console.log, In production, record your logs to files.
+
+**Level 2**<br>
+
+Using node inspector.
+
+```bash
+node --inspect <javascript-file>
+```
+
+You can open the chrome DevTools to debug `chome:inpsect`
+
+### Testing Node Libraries
+
+To test certain functionality within in a module you need to export the code
+that you want to test.
+
+### Anatomy of tests
+
+- Your code to be tested
+- Test Suite `organize tets, provide hooks and overall environment`
+- Assertion library `conducts actual comparisons`
+- Mocks + Spies - Allows for mocking api calls, and to test to see if an
+  internal function has been called.
+
+### Types of tests
+
+- unit
+- integration
+- end-to-end
+- UI
+
+## Stepping Stone
+
+- express.js framework
+- webpack
+- commander.js
+- babel.js

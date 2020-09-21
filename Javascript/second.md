@@ -89,7 +89,7 @@ asynchronous features through the use of browser methods and funcitonality.
 
 - Web Browser APIs/Node background APIs
 - Promises
-- Event loop, Callback/Task queue and micro task queue
+- Event loop, Callstack/Task queue and micro task queue
 
 **Example:**
 1. xhr/fetch => Network Reqeusts
@@ -109,7 +109,7 @@ finished running.
 **Event Loop**
 
 This is the concept in Javascript that checks whether the global call stack is
-empty and when it's appropriate for Callback queue to be emptied.
+empty and when it's appropriate for Callstack queue to be emptied.
 
 ### ES5 Web Browser APIs with callback functions
 
@@ -142,7 +142,7 @@ once resolved. This queue takes precedence over the `Call Stack Queue` but is
 still lower priority to the Javascript global `Callstack`. Once sycrhonous
 javascript code has been completed the order is:
 1. Callstack Javascript Global
-2. Micro Take Queue
+2. Micro Task Queue
 3. Callstack Queue
 
 **Note:** `Callstack Queue` gets functions that were directly passed to a Web

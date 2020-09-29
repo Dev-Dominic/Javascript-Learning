@@ -218,3 +218,105 @@ useEffect is not ran until after component is rendered.
 ```javascript
 useEffects(callback, arrayOfDependencies);
 ```
+
+**Note:** To make `useEffects` run once set the `arrayOfDependencies` to run
+only once on the initial render.
+
+## Async and Routing
+
+**One-WAy Data Flow** is essentially data flowing from parent components down to
+child components.
+
+### Reach Router
+
+Uses a scoring algorithm to determine what route to render based on path.
+
+```javascript
+<Router>
+    <ComponentOne path='/' />
+    <ComponentTwo path='/details/1' />
+    <ComponentThree path='/details/:id' />
+</Router>
+```
+
+**Note:** The props based to a route `example: ComponentOne` will pass routing
+information to the props.
+
+Links utilize underlying `a` anchor tags to change pages.
+```javascript
+<Link to="/">Home Page</Link>
+```
+
+**Redircting in Reach Route**<br>
+
+```
+// Using react component
+<Redirect to="/">
+
+// Programmatically
+navigate("/");
+```
+
+## Class Components
+
+Basic template of Class Component, which requires that it has a render method.
+Hooks cannot be utilized with `class components`.
+
+```javascript
+class Details extends React.Component{
+    render (){}
+}
+```
+
+componnetDidMount is used for the initial mounting of a component.
+```javascript
+componnetDidMount() {}
+```
+
+## Error Boundaries
+
+[Error Boundaries Docs](https://reactjs.org/docs/error-boundaries.html)
+Allows for captuaring of errors without crashing the application.
+
+- getDerivedStateFromError
+- componnetDidCatch
+
+## Context
+
+This is used as an additional data store. That is separate from state within an
+individual component.
+
+**Insantiation**<br>
+```javascript
+import { createContext } from "react";
+
+const ThemeContext = createContext(["grean", () => {}]);
+```
+
+**Using Context**<br>
+```javascript
+import ThemeContext from "./ThemeContext";
+
+const themeHook = useState("darkblue");
+
+<ThemeContext.Provider value={themeHook}>
+    <h1>Something</h1>
+</ThemeContext.Provider>
+```
+
+### Using Context with Hooks
+
+To utilize `useContext` hook the parent of a given component needs to have a
+`Context.Provider`.
+```javascript
+const [theme, setTheme] = useContext(ThemeContext);
+```
+
+## Portals `Creating Modals`
+
+[Portal Docs](https://reactjs.org/docs/portals.html)
+
+**Note:** useRef is used to reference a DOM element, used so that a given DOM
+element is not re-rendered each time.
+
+``````
